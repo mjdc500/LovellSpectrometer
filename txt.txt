@@ -1,0 +1,26 @@
+Approach to azimuthal scans
+Obviously want to do all scans but C-band takes priority.
+What am I searching for? We have night and day scans so looking for global differences between night and day.
+Looking for azimuthal variation in general RFI structure. In C-band this might be less pronounced, but check anyway. Main thing at C-band was to justify use of 2GHz centred on 6.5GHz.
+
+Basic strategy:
+Use OFCOM spectrum mapper to find spectrum allocations for each band
+Then use groups of channels from these known frequencies to measure changes in power with azimuth, and compare night/day.
+Expecting quite large changes between night and day for mobile phone handsets, for example.
+Smaller changes for satellites, and much of C-band stuff.
+Fixed point transmitters at top of C-band might show bigger change.
+
+Think about how I want to present this.
+Basic explanation of flagging and RFI power measurement procedure.
+In azimuth, desirable to filter out impulsive events and concentrate on general azimuthal variations.
+Presentation would be polar plots of SNR versus azimuth, with two sets of data, for night and day respectively.
+Could present imshow plots of specific features, but this kept to a minimum.
+Quick look at protected band? Events seen in protected band in azimuthal scans primed the later Protected Band via Pulsars recording.
+Specific features such as satellite events that Stuart highlighted. This primes the small section on satellite obs. Several interesting things to be seen in there.
+
+Start by cutting spectrum up into chunks. Start with explanation of why daytime and night-time expected to be different for certain allocations e.g. mobile phones. Discuss each type of noteworthy signal concurrently in terms of day/night and P1/P2. E.g. for mobile phones are they worse during the day? worse for specific Pol? 
+Mobile phones are probably the most interesting in this band, aside from protected band stuff. Directionality is key for things like mobile phones and protected band. Less directionality expected for satellites.
+
+Probably want to talk about azimuthal L-band and C-band stuff in terms of RRL and "other line" (OH, hydroxyl) observability. E.g. obviously protected band RFI prevents reliable obs of H166,167, but are there other bits of band that are reliably clear? This is probably where this azimuthal stuff is most pertinent. Or, where there is RFI, is it sufficiently polarised that one could observe the RRL in the other pol?
+
+Just WTF is that feature at 1352MHz? This isn't any GPS listed freq. although it's not very far away. It's ruddy strong.
