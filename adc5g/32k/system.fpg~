@@ -1,0 +1,518 @@
+#!/bin/kcpfpg
+?uploadbin
+?register sys_board_id 0x0 0x4
+?register sys_rev 0x4 0x4
+?register sys_rev_rcs 0x8 0x4
+?register sys_scratchpad 0xc 0x4
+?register sys_clkcounter 0x10 0x4
+?register sfp_gpio_data_in 0x60000 0x4
+?register sfp_gpio_data_out 0x60004 0x4
+?register sfp_gpio_data_oe 0x60008 0x4
+?register sfp_gpio_data_ded 0x6000c 0x4
+?register sfp_mdio_sel 0x60010 0x4
+?register sfp_op_issue 0x60014 0x4
+?register sfp_op_type 0x60018 0x4
+?register sfp_op_addr 0x6001c 0x4
+?register sfp_op_data 0x60020 0x4
+?register sfp_op_result 0x60024 0x4
+?register sfp_op_dbg 0x60028 0x4
+?register sfp_op_dbg1 0x6002c 0x4
+?register adc5g_controller 0x20000 0x1000
+?register acc_len 0x1000000 0x4
+?register acc_len_read 0x1000100 0x4
+?register auto_reset_enable 0x1000200 0x4
+?register design_id 0x1000300 0x4
+?register dest_ip_pol1 0x1000400 0x4
+?register dest_port_pol1 0x1000500 0x4
+?register eof_cnt 0x1000600 0x4
+?register fft_ovf 0x1000700 0x4
+?register fftshift 0x1000800 0x4
+?register fftshift_read 0x1000900 0x4
+?register full 0x1000A00 0x4
+?register linkup 0x1000B00 0x4
+?register period 0x1000C00 0x4
+?register rst_clock 0x1000D00 0x4
+?register sat 0x1000E00 0x4
+?register snap_sub_central_channel 0x1000F00 0x4
+?register snap_sub_p1_bram 0x1008000 0x8000
+?register snap_sub_raw_0_bram 0x1010000 0x4000
+?register snap_sub_raw_0_ctrl 0x1014000 0x4
+?register snap_sub_raw_0_status 0x1014100 0x4
+?register snap_sub_tge_snap_p1_bram 0x1016000 0x2000
+?register snap_sub_tge_snap_p1_ctrl 0x1018000 0x4
+?register snap_sub_tge_snap_p1_status 0x1018100 0x4
+?register snap_sub_tge_snap_p1_tr_en_cnt 0x1018200 0x4
+?register sync_gen_PPS_enable 0x1018300 0x4
+?register sync_gen_auto_sync_enable 0x1018400 0x4
+?register sync_gen_counter_value 0x1018500 0x4
+?register sync_gen_software_pps 0x1018600 0x4
+?register sync_gen_sync_clocks 0x1080000 0x4
+?register sync_status 0x1080100 0x4
+?register tenge_enable 0x1080200 0x4
+?register tge_pol1 0x1084000 0x4000
+?register tx 0x1088000 0x4
+?register tx_over 0x1088100 0x4
+?meta XSG_core_config	xps:xsg	hw_sys	ROACH2:sx475t
+?meta XSG_core_config	xps:xsg	clk_src	adc0_clk
+?meta XSG_core_config	xps:xsg	roach_clk_src	sys_clk
+?meta XSG_core_config	xps:xsg	roach2_clk_src	adc0_clk
+?meta XSG_core_config	xps:xsg	mkdig_clk_src	sys_clk
+?meta XSG_core_config	xps:xsg	clk_rate	256
+?meta XSG_core_config	xps:xsg	sample_period	1
+?meta XSG_core_config	xps:xsg	synthesis_tool	XST
+?meta snap_sub/p1_bram	xps:bram	arith_type	Unsigned
+?meta snap_sub/p1_bram	xps:bram	addr_width	12
+?meta snap_sub/p1_bram	xps:bram	data_width	64
+?meta snap_sub/p1_bram	xps:bram	reg_prim_output	on
+?meta snap_sub/p1_bram	xps:bram	reg_core_output	on
+?meta snap_sub/p1_bram	xps:bram	optimization	Minimum_Area
+?meta snap_sub/p1_bram	xps:bram	data_bin_pt	0
+?meta snap_sub/p1_bram	xps:bram	init_vals	[0:2^10-1]
+?meta snap_sub/p1_bram	xps:bram	sample_rate	1
+?meta snap_sub/raw_0/bram	xps:bram	arith_type	Unsigned
+?meta snap_sub/raw_0/bram	xps:bram	addr_width	10
+?meta snap_sub/raw_0/bram	xps:bram	data_width	128
+?meta snap_sub/raw_0/bram	xps:bram	reg_prim_output	on
+?meta snap_sub/raw_0/bram	xps:bram	reg_core_output	on
+?meta snap_sub/raw_0/bram	xps:bram	optimization	Minimum_Area
+?meta snap_sub/raw_0/bram	xps:bram	data_bin_pt	0
+?meta snap_sub/raw_0/bram	xps:bram	init_vals	[0:2^10-1]
+?meta snap_sub/raw_0/bram	xps:bram	sample_rate	1
+?meta snap_sub/tge_snap_p1/bram	xps:bram	arith_type	Unsigned
+?meta snap_sub/tge_snap_p1/bram	xps:bram	addr_width	10
+?meta snap_sub/tge_snap_p1/bram	xps:bram	data_width	64
+?meta snap_sub/tge_snap_p1/bram	xps:bram	reg_prim_output	on
+?meta snap_sub/tge_snap_p1/bram	xps:bram	reg_core_output	on
+?meta snap_sub/tge_snap_p1/bram	xps:bram	optimization	Minimum_Area
+?meta snap_sub/tge_snap_p1/bram	xps:bram	data_bin_pt	0
+?meta snap_sub/tge_snap_p1/bram	xps:bram	init_vals	[0:2^10-1]
+?meta snap_sub/tge_snap_p1/bram	xps:bram	sample_rate	1
+?meta acc_len	xps:sw_reg	io_dir	From\_Processor
+?meta acc_len	xps:sw_reg	io_delay	0
+?meta acc_len	xps:sw_reg	sample_period	1
+?meta acc_len	xps:sw_reg	names	reg
+?meta acc_len	xps:sw_reg	bitwidths	32
+?meta acc_len	xps:sw_reg	bin_pts	0
+?meta acc_len	xps:sw_reg	arith_types	0
+?meta acc_len	xps:sw_reg	sim_port	on
+?meta acc_len	xps:sw_reg	show_format	off
+?meta acc_len_read	xps:sw_reg	io_dir	To\_Processor
+?meta acc_len_read	xps:sw_reg	io_delay	0
+?meta acc_len_read	xps:sw_reg	sample_period	1
+?meta acc_len_read	xps:sw_reg	names	reg
+?meta acc_len_read	xps:sw_reg	bitwidths	32
+?meta acc_len_read	xps:sw_reg	bin_pts	0
+?meta acc_len_read	xps:sw_reg	arith_types	0
+?meta acc_len_read	xps:sw_reg	sim_port	off
+?meta acc_len_read	xps:sw_reg	show_format	off
+?meta auto_reset_enable	xps:sw_reg	io_dir	From\_Processor
+?meta auto_reset_enable	xps:sw_reg	io_delay	0
+?meta auto_reset_enable	xps:sw_reg	sample_period	1
+?meta auto_reset_enable	xps:sw_reg	names	reg
+?meta auto_reset_enable	xps:sw_reg	bitwidths	1
+?meta auto_reset_enable	xps:sw_reg	bin_pts	0
+?meta auto_reset_enable	xps:sw_reg	arith_types	2
+?meta auto_reset_enable	xps:sw_reg	sim_port	off
+?meta auto_reset_enable	xps:sw_reg	show_format	off
+?meta design_id	xps:sw_reg	io_dir	To\_Processor
+?meta design_id	xps:sw_reg	io_delay	0
+?meta design_id	xps:sw_reg	sample_period	1
+?meta design_id	xps:sw_reg	names	reg
+?meta design_id	xps:sw_reg	bitwidths	32
+?meta design_id	xps:sw_reg	bin_pts	0
+?meta design_id	xps:sw_reg	arith_types	0
+?meta design_id	xps:sw_reg	sim_port	off
+?meta design_id	xps:sw_reg	show_format	on
+?meta dest_ip_pol1	xps:sw_reg	io_dir	From\_Processor
+?meta dest_ip_pol1	xps:sw_reg	io_delay	0
+?meta dest_ip_pol1	xps:sw_reg	sample_period	1
+?meta dest_ip_pol1	xps:sw_reg	names	reg
+?meta dest_ip_pol1	xps:sw_reg	bitwidths	32
+?meta dest_ip_pol1	xps:sw_reg	bin_pts	0
+?meta dest_ip_pol1	xps:sw_reg	arith_types	0
+?meta dest_ip_pol1	xps:sw_reg	sim_port	off
+?meta dest_ip_pol1	xps:sw_reg	show_format	off
+?meta dest_port_pol1	xps:sw_reg	io_dir	From\_Processor
+?meta dest_port_pol1	xps:sw_reg	io_delay	0
+?meta dest_port_pol1	xps:sw_reg	sample_period	1
+?meta dest_port_pol1	xps:sw_reg	names	reg
+?meta dest_port_pol1	xps:sw_reg	bitwidths	32
+?meta dest_port_pol1	xps:sw_reg	bin_pts	0
+?meta dest_port_pol1	xps:sw_reg	arith_types	0
+?meta dest_port_pol1	xps:sw_reg	sim_port	off
+?meta dest_port_pol1	xps:sw_reg	show_format	off
+?meta eof_cnt	xps:sw_reg	io_dir	To\_Processor
+?meta eof_cnt	xps:sw_reg	io_delay	0
+?meta eof_cnt	xps:sw_reg	sample_period	1
+?meta eof_cnt	xps:sw_reg	names	reg
+?meta eof_cnt	xps:sw_reg	bitwidths	32
+?meta eof_cnt	xps:sw_reg	bin_pts	0
+?meta eof_cnt	xps:sw_reg	arith_types	0
+?meta eof_cnt	xps:sw_reg	sim_port	off
+?meta eof_cnt	xps:sw_reg	show_format	off
+?meta fft_ovf	xps:sw_reg	io_dir	To\_Processor
+?meta fft_ovf	xps:sw_reg	io_delay	0
+?meta fft_ovf	xps:sw_reg	sample_period	1
+?meta fft_ovf	xps:sw_reg	names	reg
+?meta fft_ovf	xps:sw_reg	bitwidths	32
+?meta fft_ovf	xps:sw_reg	bin_pts	0
+?meta fft_ovf	xps:sw_reg	arith_types	0
+?meta fft_ovf	xps:sw_reg	sim_port	off
+?meta fft_ovf	xps:sw_reg	show_format	off
+?meta fftshift	xps:sw_reg	io_dir	From\_Processor
+?meta fftshift	xps:sw_reg	io_delay	0
+?meta fftshift	xps:sw_reg	sample_period	1
+?meta fftshift	xps:sw_reg	names	reg
+?meta fftshift	xps:sw_reg	bitwidths	32
+?meta fftshift	xps:sw_reg	bin_pts	0
+?meta fftshift	xps:sw_reg	arith_types	0
+?meta fftshift	xps:sw_reg	sim_port	on
+?meta fftshift	xps:sw_reg	show_format	off
+?meta fftshift_read	xps:sw_reg	io_dir	To\_Processor
+?meta fftshift_read	xps:sw_reg	io_delay	0
+?meta fftshift_read	xps:sw_reg	sample_period	1
+?meta fftshift_read	xps:sw_reg	names	reg
+?meta fftshift_read	xps:sw_reg	bitwidths	32
+?meta fftshift_read	xps:sw_reg	bin_pts	0
+?meta fftshift_read	xps:sw_reg	arith_types	0
+?meta fftshift_read	xps:sw_reg	sim_port	off
+?meta fftshift_read	xps:sw_reg	show_format	off
+?meta full	xps:sw_reg	io_dir	To\_Processor
+?meta full	xps:sw_reg	io_delay	0
+?meta full	xps:sw_reg	sample_period	1
+?meta full	xps:sw_reg	names	reg
+?meta full	xps:sw_reg	bitwidths	32
+?meta full	xps:sw_reg	bin_pts	0
+?meta full	xps:sw_reg	arith_types	0
+?meta full	xps:sw_reg	sim_port	off
+?meta full	xps:sw_reg	show_format	off
+?meta linkup	xps:sw_reg	io_dir	To\_Processor
+?meta linkup	xps:sw_reg	io_delay	0
+?meta linkup	xps:sw_reg	sample_period	1
+?meta linkup	xps:sw_reg	names	reg
+?meta linkup	xps:sw_reg	bitwidths	1
+?meta linkup	xps:sw_reg	bin_pts	0
+?meta linkup	xps:sw_reg	arith_types	2
+?meta linkup	xps:sw_reg	sim_port	off
+?meta linkup	xps:sw_reg	show_format	off
+?meta period	xps:sw_reg	io_dir	From\_Processor
+?meta period	xps:sw_reg	io_delay	0
+?meta period	xps:sw_reg	sample_period	1
+?meta period	xps:sw_reg	names	reg
+?meta period	xps:sw_reg	bitwidths	32
+?meta period	xps:sw_reg	bin_pts	0
+?meta period	xps:sw_reg	arith_types	0
+?meta period	xps:sw_reg	sim_port	on
+?meta period	xps:sw_reg	show_format	off
+?meta rst_clock	xps:sw_reg	io_dir	From\_Processor
+?meta rst_clock	xps:sw_reg	io_delay	0
+?meta rst_clock	xps:sw_reg	sample_period	1
+?meta rst_clock	xps:sw_reg	names	reg
+?meta rst_clock	xps:sw_reg	bitwidths	32
+?meta rst_clock	xps:sw_reg	bin_pts	0
+?meta rst_clock	xps:sw_reg	arith_types	0
+?meta rst_clock	xps:sw_reg	sim_port	on
+?meta rst_clock	xps:sw_reg	show_format	off
+?meta sat	xps:sw_reg	io_dir	To\_Processor
+?meta sat	xps:sw_reg	io_delay	0
+?meta sat	xps:sw_reg	sample_period	1
+?meta sat	xps:sw_reg	names	reg
+?meta sat	xps:sw_reg	bitwidths	32
+?meta sat	xps:sw_reg	bin_pts	0
+?meta sat	xps:sw_reg	arith_types	0
+?meta sat	xps:sw_reg	sim_port	off
+?meta sat	xps:sw_reg	show_format	off
+?meta snap_sub/central_channel	xps:sw_reg	io_dir	From\_Processor
+?meta snap_sub/central_channel	xps:sw_reg	io_delay	0
+?meta snap_sub/central_channel	xps:sw_reg	sample_period	1
+?meta snap_sub/central_channel	xps:sw_reg	names	reg
+?meta snap_sub/central_channel	xps:sw_reg	bitwidths	32
+?meta snap_sub/central_channel	xps:sw_reg	bin_pts	0
+?meta snap_sub/central_channel	xps:sw_reg	arith_types	0
+?meta snap_sub/central_channel	xps:sw_reg	sim_port	on
+?meta snap_sub/central_channel	xps:sw_reg	show_format	off
+?meta snap_sub/raw_0/ctrl	xps:sw_reg	io_dir	From\_Processor
+?meta snap_sub/raw_0/ctrl	xps:sw_reg	io_delay	0
+?meta snap_sub/raw_0/ctrl	xps:sw_reg	sample_period	1
+?meta snap_sub/raw_0/ctrl	xps:sw_reg	names	reg
+?meta snap_sub/raw_0/ctrl	xps:sw_reg	bitwidths	32
+?meta snap_sub/raw_0/ctrl	xps:sw_reg	bin_pts	0
+?meta snap_sub/raw_0/ctrl	xps:sw_reg	arith_types	0
+?meta snap_sub/raw_0/ctrl	xps:sw_reg	sim_port	on
+?meta snap_sub/raw_0/ctrl	xps:sw_reg	show_format	on
+?meta snap_sub/raw_0/status	xps:sw_reg	io_dir	To\_Processor
+?meta snap_sub/raw_0/status	xps:sw_reg	io_delay	0
+?meta snap_sub/raw_0/status	xps:sw_reg	sample_period	1
+?meta snap_sub/raw_0/status	xps:sw_reg	names	reg
+?meta snap_sub/raw_0/status	xps:sw_reg	bitwidths	32
+?meta snap_sub/raw_0/status	xps:sw_reg	bin_pts	0
+?meta snap_sub/raw_0/status	xps:sw_reg	arith_types	0
+?meta snap_sub/raw_0/status	xps:sw_reg	sim_port	on
+?meta snap_sub/raw_0/status	xps:sw_reg	show_format	on
+?meta snap_sub/tge_snap_p1/ctrl	xps:sw_reg	io_dir	From\_Processor
+?meta snap_sub/tge_snap_p1/ctrl	xps:sw_reg	io_delay	0
+?meta snap_sub/tge_snap_p1/ctrl	xps:sw_reg	sample_period	1
+?meta snap_sub/tge_snap_p1/ctrl	xps:sw_reg	names	reg
+?meta snap_sub/tge_snap_p1/ctrl	xps:sw_reg	bitwidths	32
+?meta snap_sub/tge_snap_p1/ctrl	xps:sw_reg	bin_pts	0
+?meta snap_sub/tge_snap_p1/ctrl	xps:sw_reg	arith_types	0
+?meta snap_sub/tge_snap_p1/ctrl	xps:sw_reg	sim_port	on
+?meta snap_sub/tge_snap_p1/ctrl	xps:sw_reg	show_format	on
+?meta snap_sub/tge_snap_p1/status	xps:sw_reg	io_dir	To\_Processor
+?meta snap_sub/tge_snap_p1/status	xps:sw_reg	io_delay	0
+?meta snap_sub/tge_snap_p1/status	xps:sw_reg	sample_period	1
+?meta snap_sub/tge_snap_p1/status	xps:sw_reg	names	reg
+?meta snap_sub/tge_snap_p1/status	xps:sw_reg	bitwidths	32
+?meta snap_sub/tge_snap_p1/status	xps:sw_reg	bin_pts	0
+?meta snap_sub/tge_snap_p1/status	xps:sw_reg	arith_types	0
+?meta snap_sub/tge_snap_p1/status	xps:sw_reg	sim_port	on
+?meta snap_sub/tge_snap_p1/status	xps:sw_reg	show_format	on
+?meta snap_sub/tge_snap_p1/tr_en_cnt	xps:sw_reg	io_dir	To\_Processor
+?meta snap_sub/tge_snap_p1/tr_en_cnt	xps:sw_reg	io_delay	0
+?meta snap_sub/tge_snap_p1/tr_en_cnt	xps:sw_reg	sample_period	1
+?meta snap_sub/tge_snap_p1/tr_en_cnt	xps:sw_reg	names	reg
+?meta snap_sub/tge_snap_p1/tr_en_cnt	xps:sw_reg	bitwidths	32
+?meta snap_sub/tge_snap_p1/tr_en_cnt	xps:sw_reg	bin_pts	0
+?meta snap_sub/tge_snap_p1/tr_en_cnt	xps:sw_reg	arith_types	0
+?meta snap_sub/tge_snap_p1/tr_en_cnt	xps:sw_reg	sim_port	on
+?meta snap_sub/tge_snap_p1/tr_en_cnt	xps:sw_reg	show_format	on
+?meta sync_gen/PPS_enable	xps:sw_reg	io_dir	From\_Processor
+?meta sync_gen/PPS_enable	xps:sw_reg	io_delay	0
+?meta sync_gen/PPS_enable	xps:sw_reg	sample_period	1
+?meta sync_gen/PPS_enable	xps:sw_reg	names	reg
+?meta sync_gen/PPS_enable	xps:sw_reg	bitwidths	1
+?meta sync_gen/PPS_enable	xps:sw_reg	bin_pts	0
+?meta sync_gen/PPS_enable	xps:sw_reg	arith_types	2
+?meta sync_gen/PPS_enable	xps:sw_reg	sim_port	on
+?meta sync_gen/PPS_enable	xps:sw_reg	show_format	off
+?meta sync_gen/auto_sync_enable	xps:sw_reg	io_dir	From\_Processor
+?meta sync_gen/auto_sync_enable	xps:sw_reg	io_delay	0
+?meta sync_gen/auto_sync_enable	xps:sw_reg	sample_period	1
+?meta sync_gen/auto_sync_enable	xps:sw_reg	names	reg
+?meta sync_gen/auto_sync_enable	xps:sw_reg	bitwidths	1
+?meta sync_gen/auto_sync_enable	xps:sw_reg	bin_pts	0
+?meta sync_gen/auto_sync_enable	xps:sw_reg	arith_types	2
+?meta sync_gen/auto_sync_enable	xps:sw_reg	sim_port	on
+?meta sync_gen/auto_sync_enable	xps:sw_reg	show_format	off
+?meta sync_gen/counter_value	xps:sw_reg	io_dir	To\_Processor
+?meta sync_gen/counter_value	xps:sw_reg	io_delay	0
+?meta sync_gen/counter_value	xps:sw_reg	sample_period	1
+?meta sync_gen/counter_value	xps:sw_reg	names	reg
+?meta sync_gen/counter_value	xps:sw_reg	bitwidths	4
+?meta sync_gen/counter_value	xps:sw_reg	bin_pts	0
+?meta sync_gen/counter_value	xps:sw_reg	arith_types	0
+?meta sync_gen/counter_value	xps:sw_reg	sim_port	off
+?meta sync_gen/counter_value	xps:sw_reg	show_format	off
+?meta sync_gen/software_pps	xps:sw_reg	io_dir	From\_Processor
+?meta sync_gen/software_pps	xps:sw_reg	io_delay	0
+?meta sync_gen/software_pps	xps:sw_reg	sample_period	1
+?meta sync_gen/software_pps	xps:sw_reg	names	reg
+?meta sync_gen/software_pps	xps:sw_reg	bitwidths	1
+?meta sync_gen/software_pps	xps:sw_reg	bin_pts	0
+?meta sync_gen/software_pps	xps:sw_reg	arith_types	2
+?meta sync_gen/software_pps	xps:sw_reg	sim_port	on
+?meta sync_gen/software_pps	xps:sw_reg	show_format	off
+?meta sync_gen/sync_clocks	xps:sw_reg	io_dir	From\_Processor
+?meta sync_gen/sync_clocks	xps:sw_reg	io_delay	0
+?meta sync_gen/sync_clocks	xps:sw_reg	sample_period	1
+?meta sync_gen/sync_clocks	xps:sw_reg	names	reg
+?meta sync_gen/sync_clocks	xps:sw_reg	bitwidths	32
+?meta sync_gen/sync_clocks	xps:sw_reg	bin_pts	0
+?meta sync_gen/sync_clocks	xps:sw_reg	arith_types	0
+?meta sync_gen/sync_clocks	xps:sw_reg	sim_port	on
+?meta sync_gen/sync_clocks	xps:sw_reg	show_format	off
+?meta sync_status	xps:sw_reg	io_dir	To\_Processor
+?meta sync_status	xps:sw_reg	io_delay	0
+?meta sync_status	xps:sw_reg	sample_period	1
+?meta sync_status	xps:sw_reg	names	reg
+?meta sync_status	xps:sw_reg	bitwidths	1
+?meta sync_status	xps:sw_reg	bin_pts	0
+?meta sync_status	xps:sw_reg	arith_types	2
+?meta sync_status	xps:sw_reg	sim_port	off
+?meta sync_status	xps:sw_reg	show_format	off
+?meta tenge_enable	xps:sw_reg	io_dir	From\_Processor
+?meta tenge_enable	xps:sw_reg	io_delay	0
+?meta tenge_enable	xps:sw_reg	sample_period	1
+?meta tenge_enable	xps:sw_reg	names	reg
+?meta tenge_enable	xps:sw_reg	bitwidths	1
+?meta tenge_enable	xps:sw_reg	bin_pts	0
+?meta tenge_enable	xps:sw_reg	arith_types	2
+?meta tenge_enable	xps:sw_reg	sim_port	on
+?meta tenge_enable	xps:sw_reg	show_format	off
+?meta tx	xps:sw_reg	io_dir	To\_Processor
+?meta tx	xps:sw_reg	io_delay	0
+?meta tx	xps:sw_reg	sample_period	1
+?meta tx	xps:sw_reg	names	reg
+?meta tx	xps:sw_reg	bitwidths	1
+?meta tx	xps:sw_reg	bin_pts	0
+?meta tx	xps:sw_reg	arith_types	2
+?meta tx	xps:sw_reg	sim_port	off
+?meta tx	xps:sw_reg	show_format	off
+?meta tx_over	xps:sw_reg	io_dir	To\_Processor
+?meta tx_over	xps:sw_reg	io_delay	0
+?meta tx_over	xps:sw_reg	sample_period	1
+?meta tx_over	xps:sw_reg	names	reg
+?meta tx_over	xps:sw_reg	bitwidths	32
+?meta tx_over	xps:sw_reg	bin_pts	0
+?meta tx_over	xps:sw_reg	arith_types	0
+?meta tx_over	xps:sw_reg	sim_port	off
+?meta tx_over	xps:sw_reg	show_format	off
+?meta tge_pol1	xps:tengbe_v2	flavour	sfp+
+?meta tge_pol1	xps:tengbe_v2	slot	0
+?meta tge_pol1	xps:tengbe_v2	port_r1	0
+?meta tge_pol1	xps:tengbe_v2	port_r2_cx4	0
+?meta tge_pol1	xps:tengbe_v2	port_r2_sfpp	3
+?meta tge_pol1	xps:tengbe_v2	rx_dist_ram	on
+?meta tge_pol1	xps:tengbe_v2	large_frames	on
+?meta tge_pol1	xps:tengbe_v2	show_param	on
+?meta tge_pol1	xps:tengbe_v2	pre_emph_r2	0.74
+?meta tge_pol1	xps:tengbe_v2	pre_emph	3
+?meta tge_pol1	xps:tengbe_v2	post_emph_r2	0.18
+?meta tge_pol1	xps:tengbe_v2	rxeqmix_r2	7
+?meta tge_pol1	xps:tengbe_v2	swing_r2	940
+?meta tge_pol1	xps:tengbe_v2	swing	800
+?meta tge_pol1	xps:tengbe_v2	fab_en	off
+?meta tge_pol1	xps:tengbe_v2	fab_mac	20015998304256
+?meta tge_pol1	xps:tengbe_v2	fab_ip	3232236393
+?meta tge_pol1	xps:tengbe_v2	fab_udp	60000
+?meta tge_pol1	xps:tengbe_v2	fab_gate	1
+?meta tge_pol1	xps:tengbe_v2	cpu_rx_en	on
+?meta tge_pol1	xps:tengbe_v2	cpu_tx_en	on
+?meta tge_pol1	xps:tengbe_v2	ttl	255
+?meta tge_pol1	xps:tengbe_v2	promisc_mode	off
+?meta tge_pol1	xps:tengbe_v2	debug_ctr_width	16
+?meta tge_pol1	xps:tengbe_v2	txctr	off
+?meta tge_pol1	xps:tengbe_v2	txerrctr	off
+?meta tge_pol1	xps:tengbe_v2	txerrctr_len	100
+?meta tge_pol1	xps:tengbe_v2	txofctr	off
+?meta tge_pol1	xps:tengbe_v2	txfullctr	off
+?meta tge_pol1	xps:tengbe_v2	txvldctr	off
+?meta tge_pol1	xps:tengbe_v2	txsnaplen	0\_-\_no\_snap
+?meta tge_pol1	xps:tengbe_v2	rxctr	off
+?meta tge_pol1	xps:tengbe_v2	rxerrctr	off
+?meta tge_pol1	xps:tengbe_v2	rxerrctr_len	100
+?meta tge_pol1	xps:tengbe_v2	rxofctr	off
+?meta tge_pol1	xps:tengbe_v2	rxbadctr	off
+?meta tge_pol1	xps:tengbe_v2	rxvldctr	off
+?meta tge_pol1	xps:tengbe_v2	rxeofctr	off
+?meta tge_pol1	xps:tengbe_v2	rxsnaplen	0\_-\_no\_snap
+?meta XSG_core_config	xps:xsg	hw_sys	ROACH2:sx475t
+?meta XSG_core_config	xps:xsg	clk_src	adc0_clk
+?meta XSG_core_config	xps:xsg	roach_clk_src	sys_clk
+?meta XSG_core_config	xps:xsg	roach2_clk_src	adc0_clk
+?meta XSG_core_config	xps:xsg	mkdig_clk_src	sys_clk
+?meta XSG_core_config	xps:xsg	clk_rate	256
+?meta XSG_core_config	xps:xsg	sample_period	1
+?meta XSG_core_config	xps:xsg	synthesis_tool	XST
+?meta fft_wideband_real	casper:fft_wideband_real	n_streams	1
+?meta fft_wideband_real	casper:fft_wideband_real	fftsize	16
+?meta fft_wideband_real	casper:fft_wideband_real	n_inputs	4
+?meta fft_wideband_real	casper:fft_wideband_real	input_bit_width	18
+?meta fft_wideband_real	casper:fft_wideband_real	bin_pt_in	17
+?meta fft_wideband_real	casper:fft_wideband_real	coeff_bit_width	18
+?meta fft_wideband_real	casper:fft_wideband_real	unscramble	on
+?meta fft_wideband_real	casper:fft_wideband_real	async	off
+?meta fft_wideband_real	casper:fft_wideband_real	add_latency	2
+?meta fft_wideband_real	casper:fft_wideband_real	mult_latency	3
+?meta fft_wideband_real	casper:fft_wideband_real	bram_latency	4
+?meta fft_wideband_real	casper:fft_wideband_real	conv_latency	5
+?meta fft_wideband_real	casper:fft_wideband_real	input_latency	2
+?meta fft_wideband_real	casper:fft_wideband_real	biplex_direct_latency	2
+?meta fft_wideband_real	casper:fft_wideband_real	quantization	Round\_\_(unbiased:\_+/-\_Inf)
+?meta fft_wideband_real	casper:fft_wideband_real	overflow	Wrap
+?meta fft_wideband_real	casper:fft_wideband_real	delays_bit_limit	15
+?meta fft_wideband_real	casper:fft_wideband_real	coeffs_bit_limit	14
+?meta fft_wideband_real	casper:fft_wideband_real	coeff_sharing	off
+?meta fft_wideband_real	casper:fft_wideband_real	coeff_decimation	off
+?meta fft_wideband_real	casper:fft_wideband_real	coeff_generation	off
+?meta fft_wideband_real	casper:fft_wideband_real	cal_bits	1
+?meta fft_wideband_real	casper:fft_wideband_real	n_bits_rotation	25
+?meta fft_wideband_real	casper:fft_wideband_real	mult_spec	2
+?meta fft_wideband_real	casper:fft_wideband_real	max_fanout	1
+?meta fft_wideband_real	casper:fft_wideband_real	bitgrowth	off
+?meta fft_wideband_real	casper:fft_wideband_real	max_bits	19
+?meta fft_wideband_real	casper:fft_wideband_real	hardcode_shifts	off
+?meta fft_wideband_real	casper:fft_wideband_real	shift_schedule	[]
+?meta fft_wideband_real	casper:fft_wideband_real	dsp48_adders	off
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	n_inputs	4
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	fftsize	12
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	input_bit_width	18
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	bin_pt_in	17
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	coeff_bit_width	18
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	async	off
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	add_latency	2
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	mult_latency	3
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	bram_latency	4
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	conv_latency	5
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	quantization	Round\_\_(unbiased:\_+/-\_Inf)
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	overflow	Wrap
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	delays_bit_limit	15
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	coeffs_bit_limit	14
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	coeff_sharing	off
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	coeff_decimation	off
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	max_fanout	1
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	mult_spec	[2\_2\_2\_2\_2\_2\_2\_2\_2\_2\_2\_2]
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	bitgrowth	off
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	max_bits	19
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	hardcode_shifts	off
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	shift_schedule	[1\_1\_1\_1\_1\_1\_1\_1\_1\_1\_1\_1]
+?meta fft_wideband_real/fft_biplex_real_4x	casper:fft_biplex_real_4x	dsp48_adders	off
+?meta pfb_fir_real	casper:pfb_fir_real	pfbsize	16
+?meta pfb_fir_real	casper:pfb_fir_real	totaltaps	8
+?meta pfb_fir_real	casper:pfb_fir_real	windowtype	hamming
+?meta pfb_fir_real	casper:pfb_fir_real	n_inputs	4
+?meta pfb_fir_real	casper:pfb_fir_real	makebiplex	off
+?meta pfb_fir_real	casper:pfb_fir_real	bitwidthin	8
+?meta pfb_fir_real	casper:pfb_fir_real	bitwidthout	18
+?meta pfb_fir_real	casper:pfb_fir_real	coeffbitwidth	18
+?meta pfb_fir_real	casper:pfb_fir_real	coeffdistmem	off
+?meta pfb_fir_real	casper:pfb_fir_real	add_latency	2
+?meta pfb_fir_real	casper:pfb_fir_real	mult_latency	5
+?meta pfb_fir_real	casper:pfb_fir_real	bram_latency	3
+?meta pfb_fir_real	casper:pfb_fir_real	fan_latency	2
+?meta pfb_fir_real	casper:pfb_fir_real	conv_latency	3
+?meta pfb_fir_real	casper:pfb_fir_real	quantization	Round\_\_(unbiased:\_Even\_Values)
+?meta pfb_fir_real	casper:pfb_fir_real	fwidth	1
+?meta pfb_fir_real	casper:pfb_fir_real	mult_spec	1
+?meta pfb_fir_real	casper:pfb_fir_real	adder_folding	off
+?meta pfb_fir_real	casper:pfb_fir_real	adder_imp	DSP48
+?meta pfb_fir_real	casper:pfb_fir_real	coeffs_share	off
+?meta snap_sub/raw_0	casper:snapshot	storage	bram
+?meta snap_sub/raw_0	casper:snapshot	dram_dimm	1
+?meta snap_sub/raw_0	casper:snapshot	dram_clock	200
+?meta snap_sub/raw_0	casper:snapshot	nsamples	10
+?meta snap_sub/raw_0	casper:snapshot	data_width	128
+?meta snap_sub/raw_0	casper:snapshot	offset	off
+?meta snap_sub/raw_0	casper:snapshot	circap	off
+?meta snap_sub/raw_0	casper:snapshot	value	off
+?meta snap_sub/raw_0	casper:snapshot	use_dsp48	off
+?meta snap_sub/tge_snap_p1	casper:snapshot	storage	bram
+?meta snap_sub/tge_snap_p1	casper:snapshot	dram_dimm	1
+?meta snap_sub/tge_snap_p1	casper:snapshot	dram_clock	200
+?meta snap_sub/tge_snap_p1	casper:snapshot	nsamples	10
+?meta snap_sub/tge_snap_p1	casper:snapshot	data_width	64
+?meta snap_sub/tge_snap_p1	casper:snapshot	offset	off
+?meta snap_sub/tge_snap_p1	casper:snapshot	circap	on
+?meta snap_sub/tge_snap_p1	casper:snapshot	value	off
+?meta snap_sub/tge_snap_p1	casper:snapshot	use_dsp48	off
+?meta spead_pack	casper:spead_pack	max_pkt_len_bits	10
+?meta spead_pack	casper:spead_pack	header_ids	0x1600,\_0x1601,\_0x1602,\_0x1603,\_0x1604
+?meta spead_pack	casper:spead_pack	header_ind_ids	0x1800
+?meta spead_pack	casper:spead_pack	spead_msw	64
+?meta spead_pack	casper:spead_pack	spead_lsw	48
+?meta spead_pack	casper:spead_pack	spead_version	4
+?meta spead_pack	casper:spead_pack	bytes_per_word	8
+?meta 77777	77777	tags	casper:fft_biplex_real_4x,casper:fft_wideband_real,casper:pfb_fir_real,casper:snapshot,casper:spead_pack,xps:bram,xps:sw_reg,xps:tengbe_v2,xps:xsg
+?meta 77777	77777	system	c_proto32k
+?meta 77777	77777	builddate	16-Feb-2018\_19:37:25
+?meta 77777	77777	blk	c_proto32k/tge_pol1
+?meta 77777	77777	demux	1:1
+?meta 77777	77777	fig_name	xbsIndex_r4/WaveScope
+?meta 77777	77777	hardcode_shifts	off
+?meta 77777	77777	hw_subsys	sx475t
+?meta 77777	77777	hw_sys	ROACH2
+?meta 77777	77777	map_tail	on
+?meta 77777	77777	myclksrc	adc0_clk
+?meta 77777	77777	myname	c_proto32k/XSG_core_config
+?meta 77777	77777	use_hdl	off
+#giterror: could not get GIT info for system "c_proto32k": /home/mike/roach_spec_devel/ska_fork/2GHz/32k/c_proto32k.slx\n#giterror: Could not get GIT info for mlib_devel: /home/mike/mlib_devel\n?quit
